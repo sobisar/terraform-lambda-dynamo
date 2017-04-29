@@ -7,7 +7,7 @@
 2. Download and install [Terraform] -> This is just an exe that you run on windows. -> I put my copy in a folder called c:\devtools.
 3. Add c:\devtools to your path. On windows I followed [these instructions].
 4. I confirmed this on windows by using the `$Env:Path` command in PowerShell.
-5. Install [AWS Toolkit for VS]
+5. Install [AWS Toolkit for VS2017]
 
 ###### Add AWS Credentials
 
@@ -23,12 +23,14 @@
 
 ###### Creating New C# Service
 
-1. Navigate to your directory in your command prompt. For me this was `cd C:\GitHub\terraform-lambda-dynamo\`
-2. Use the following command `serverless create --template aws-csharp --path first-function
-`
-3. I modified the `Handler.cs` file to respond with `return new Response("This is a response from Thomas Sobieck's lambda function.", request);` on line 9
-4. I then ran `.\first-function\build.ps1`-> This didn't work because I didn't have a solution file
-5. It output `.\first-function\`
+1. Open up Visual Studio
+2. Goto File -> New -> Project
+3. Goto Visual C# -> AWS Lambda
+4. Create a new AWS Lambda Project with Test(.NET Core)
+5. Name it `FirstLambda`
+6. Select Empty Project
+7. Build in release mode
+8.
 
 
 ###### Helpful links
@@ -43,5 +45,5 @@
 [these instructions]:http://stackoverflow.com/a/1618297/2740086
 [AWS Security]: https://console.aws.amazon.com/iam/home?region=us-west-2#/security_credential
 [Serverless C# on AWS Lambda (pt. 1) - Getting Started]: http://thingrepository.com/2017/02/05/Serverless-C-on-AWS-Lambda-pt-1/
-[AWS Toolkit for VS]: https://aws.amazon.com/visualstudio/
+[AWS Toolkit for VS2017]: https://aws.amazon.com/blogs/developer/preview-of-the-aws-toolkit-for-visual-studio-2017/
 [write serverless functions using aws lambda and c#]: https://www.codeproject.com/Articles/1172832/write-serverless-functions-using-aws-lambda-and-cs

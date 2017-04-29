@@ -1,0 +1,7 @@
+{
+  "commands": {
+    "packageLambda": {
+      "fileName": "packageLambda.ps1"
+    }
+  }
+}
