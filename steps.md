@@ -30,7 +30,9 @@
 5. Name it `FirstLambda`
 6. Select Empty Project
 7. Build in release mode
-8.
+8. Run this [Powershell Script]
+
+Now you have a deployment package for Lambda @ `terraform-lambda-dynamo\FirstLambda\deploy-package.zip`!
 
 
 ###### Helpful links
@@ -47,3 +49,4 @@
 [Serverless C# on AWS Lambda (pt. 1) - Getting Started]: http://thingrepository.com/2017/02/05/Serverless-C-on-AWS-Lambda-pt-1/
 [AWS Toolkit for VS2017]: https://aws.amazon.com/blogs/developer/preview-of-the-aws-toolkit-for-visual-studio-2017/
 [write serverless functions using aws lambda and c#]: https://www.codeproject.com/Articles/1172832/write-serverless-functions-using-aws-lambda-and-cs
+[PowerShell Script]: https://raw.githubusercontent.com/sobisar/terraform-lambda-dynamo/master/FirstLambda/packageLambda.ps1

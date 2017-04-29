@@ -16,4 +16,4 @@ $packageName = "deploy-package.zip"
 
 rm "$publishDirectory/$packageName" -ErrorAction SilentlyContinue
 ZipFiles "$(pwd)/$packageName" "$(pwd)/$publishDirectory"
-mv "$packageName" $publishDirectory
+
