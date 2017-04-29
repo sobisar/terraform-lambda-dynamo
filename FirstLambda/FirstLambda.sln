@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9198A868-21EE-4638-BA05-8A546CA17328}"
 	ProjectSection(SolutionItems) = preProject
 		commands.json = commands.json
+		packageLambda.ps1 = packageLambda.ps1
 	EndProjectSection
 EndProject
 Global

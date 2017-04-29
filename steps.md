@@ -5,9 +5,10 @@
 
 1. Download and install [The AWS CLI]
 2. Download and install [Terraform] -> This is just an exe that you run on windows. -> I put my copy in a folder called c:\devtools.
-3. Add c:\devtools to your path. On windows I followed [these instructions].
-4. I confirmed this on windows by using the `$Env:Path` command in PowerShell.
-5. Install [AWS Toolkit for VS2017]
+3. Add c:\devtools to your path. `[Environment]::SetEnvironmentVariable("Path", $env:Path + ";c:\devtools", [EnvironmentVariableTarget]::Machine)` in powershell.
+4. Restart PowerShell
+5. I confirmed this on windows by using the `$Env:Path` command in PowerShell.
+6. Install [AWS Toolkit for VS2017]
 
 ###### Add AWS Credentials
 
@@ -32,14 +33,36 @@
 7. Build in release mode
 8. Run this [Powershell Script]
 
-Now you have a deployment package for Lambda @ `terraform-lambda-dynamo\FirstLambda\deploy-package.zip`!
+Now you have a deployment package for Lambda @ `terraform-lambda-dynamo\FirstLambda\FirstLambda-CurrentDeploy.zip`!
 
+The package is the default. It takes a string and make it uppercase.
+
+##### Running Terraform
+
+The terraform_config.tf file has been set up to deploy to aws lambda.
+
+1. Goto the `terraform-lambda-dynamo` folder in Powershell
+2. Run `terraform plan` -> This will show you what will happen when you run the Script
+3. If all looks good run `terraform apply` -> This will create the service
+4. Run `terraform show` to see that everything is working well.
+
+
+##### Invoking Your function
+
+1. Type `aws lambda list-functions` to see your function
+2. This should show your new function.
+3. 
+
+##### Destroying
+
+1. Type `terraform destroy` to delete the services in the `.tf` file
 
 ###### Helpful links
 
  - [Helpful Blog on Terraform]
  - [Serverless C# on AWS Lambda (pt. 1) - Getting Started]
  - [write serverless functions using aws lambda and c#]
+ - [Using Terraform to setup AWS API-Gateway and Lambda]
 
 [The AWS CLI]: https://aws.amazon.com/cli/
 [Terraform]: https://www.terraform.io/intro/getting-started/install.html
@@ -50,3 +73,4 @@ Now you have a deployment package for Lambda @ `terraform-lambda-dynamo\FirstLam
 [AWS Toolkit for VS2017]: https://aws.amazon.com/blogs/developer/preview-of-the-aws-toolkit-for-visual-studio-2017/
 [write serverless functions using aws lambda and c#]: https://www.codeproject.com/Articles/1172832/write-serverless-functions-using-aws-lambda-and-cs
 [PowerShell Script]: https://raw.githubusercontent.com/sobisar/terraform-lambda-dynamo/master/FirstLambda/packageLambda.ps1
+[Using Terraform to setup AWS API-Gateway and Lambda]: https://andydote.co.uk/2017/03/17/terraform-aws-lambda-api-gateway/
