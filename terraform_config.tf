@@ -1,3 +1,9 @@
+provider "aws" {
+  access_key = "yourkey"
+  secret_key = "yoursecret"
+  region     = "us-west-2"
+}
+
 resource "aws_iam_role" "iam_for_lambda" {
   name = "iam_for_lambda"
 
