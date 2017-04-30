@@ -21,6 +21,7 @@
 7. I gave the user `SystemAdministrator` permissions
 8. I then entered my credentials and gave it the default region of `us-east-2`
 9. I left output format blank
+10. Get AWS account id from [AWS Account Page]
 
 ###### Creating New C# Service
 
@@ -51,7 +52,7 @@ The terraform_config.tf file has been set up to deploy to aws lambda.
 
 1. Type `aws lambda list-functions` to see your function
 2. This should show your new function.
-3. 
+3.
 
 ##### Destroying
 
@@ -63,6 +64,7 @@ The terraform_config.tf file has been set up to deploy to aws lambda.
  - [Serverless C# on AWS Lambda (pt. 1) - Getting Started]
  - [write serverless functions using aws lambda and c#]
  - [Using Terraform to setup AWS API-Gateway and Lambda]
+ - [TF File Set up with custom domains and everything!]
 
 [The AWS CLI]: https://aws.amazon.com/cli/
 [Terraform]: https://www.terraform.io/intro/getting-started/install.html
@@ -74,3 +76,5 @@ The terraform_config.tf file has been set up to deploy to aws lambda.
 [write serverless functions using aws lambda and c#]: https://www.codeproject.com/Articles/1172832/write-serverless-functions-using-aws-lambda-and-cs
 [PowerShell Script]: https://raw.githubusercontent.com/sobisar/terraform-lambda-dynamo/master/FirstLambda/packageLambda.ps1
 [Using Terraform to setup AWS API-Gateway and Lambda]: https://andydote.co.uk/2017/03/17/terraform-aws-lambda-api-gateway/
+[AWS Account Page]: https://console.aws.amazon.com/billing/home?#/account
+[TF File Set up with custom domains and everything!]:https://github.com/hashicorp/terraform/issues/9271

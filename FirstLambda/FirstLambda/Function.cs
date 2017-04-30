@@ -1,22 +1,37 @@
 using Amazon.Lambda.Core;
-
-// Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
-[assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
+using Amazon.Lambda.APIGatewayEvents;
+using Newtonsoft.Json;
 
 namespace FirstLambda
 {
     public class FunctionHandler
     {
-
-        /// <summary>
-        /// A simple function that takes a string and does a ToUpper
-        /// </summary>
-        /// <param name="input"></param>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        public string Handle(string input, ILambdaContext context)
+        [LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
+        public APIGatewayProxyResponse Handle(APIGatewayProxyRequest request)
         {
-            return input?.ToUpper();
+            var something = JsonConvert.DeserializeObject<Something>(request.Body);
+
+            var somethingWithRequest = new SomethingWithAllRequest { Something = something, Request = request };
+
+            return new APIGatewayProxyResponse
+            {
+                Body = JsonConvert.SerializeObject(somethingWithRequest),
+                StatusCode = 200,
+            };
         }
+    }
+
+    public class Something
+    {
+        public int NumberOfStuff { get; set; }
+        public string AreaOfStuff { get; set; }
+        
+        public string AdditionOfTheTwo { get { return NumberOfStuff + AreaOfStuff; } }
+    }
+
+    public class SomethingWithAllRequest
+    {
+        public Something Something { get; set; }
+        public APIGatewayProxyRequest Request { get; set; }
     }
 }
