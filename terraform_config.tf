@@ -1,14 +1,7 @@
-variable "access_key" {
-  default = "YOUR ACCESS KEY"
-}
 
-variable "secret_key" {
-  default = "YOUR KEY"
-}
-
-variable "account_id" {
-  default = "YOUR ACCOUNT ID"
-}
+variable "access_key" {}
+variable "secret_key" {}
+variable "account_id" {}
 
 variable "region" {
   default = "us-west-2"
@@ -44,32 +37,48 @@ resource "aws_iam_role" "iam_for_lambda" {
 EOF
 }
 
+variable "first_lambda_namespace_of_function" {
+  default = "FirstLambda"
+}
+
+variable "first_lambda_name_of_class" {
+  default = "FunctionHandler"
+}
+
+variable "first_lambda_name_of_method" {
+  default = "Handle"
+}
+
+variable "first_lambda_http_method" {
+  default = "POST"
+}
+
 resource "aws_lambda_function" "first_lambda" {
-  filename = "FirstLambda/FirstLambda-CurrentDeploy.zip"
+  filename = "${var.first_lambda_namespace_of_function}/${var.first_lambda_namespace_of_function}-CurrentDeploy.zip"
   function_name = "first_lambda"
   role = "${aws_iam_role.iam_for_lambda.arn}"
-  handler = "FirstLambda::FirstLambda.FunctionHandler::Handle"
+  handler = "${var.first_lambda_namespace_of_function}::${var.first_lambda_namespace_of_function}.${var.first_lambda_name_of_class}::${var.first_lambda_name_of_method}"
   runtime = "dotnetcore1.0"
-  source_code_hash = "${base64sha256(file("FirstLambda/FirstLambda-CurrentDeploy.zip"))}"
+  source_code_hash = "${base64sha256(file("${var.first_lambda_namespace_of_function}/${var.first_lambda_namespace_of_function}-CurrentDeploy.zip"))}"
   publish = true
   timeout = 10
 }
 
 resource "aws_api_gateway_rest_api" "first_lambda_api" {
-  name = "FirstLambdaAPI"
+  name = "${var.first_lambda_namespace_of_function}API"
   description = "The First Lambda RestAPI"
 }
 
 resource "aws_api_gateway_resource" "first_lambda_api_resource" {
   rest_api_id = "${aws_api_gateway_rest_api.first_lambda_api.id}"
   parent_id = "${aws_api_gateway_rest_api.first_lambda_api.root_resource_id}"
-  path_part = "firstlambda"
+  path_part = "${lower(var.first_lambda_namespace_of_function)}"
 }
 
 resource "aws_api_gateway_method" "first_lambda_api_method" {
   rest_api_id = "${aws_api_gateway_rest_api.first_lambda_api.id}"
   resource_id = "${aws_api_gateway_resource.first_lambda_api_resource.id}"
-  http_method = "POST"
+  http_method = "${var.first_lambda_http_method}"
   authorization = "NONE"
 }
 
